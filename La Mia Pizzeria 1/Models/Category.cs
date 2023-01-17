@@ -4,7 +4,7 @@ namespace NetCore_01.Models
 {
     public class Category
     {
-        public int? Id { get; set; }
+        public int Id { get; set; }
 
         public string Title { get; set; }
 

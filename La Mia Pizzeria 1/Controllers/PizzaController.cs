@@ -10,48 +10,32 @@ namespace La_Mia_Pizzeria_1.Controllers
     public class PizzaController : Controller
     {
 
-
         public IActionResult Index()
         {
             using (PizzeriaContext db = new PizzeriaContext())
             {
-                List<Pizza> listaDellePizza = db.Pizze.OrderBy(id => id.CategoryId).ToList<Pizza>();
-
-                ; return View("Index", listaDellePizza);
+                List<Pizza> listaDeiPost = db.Pizze.ToList<Pizza>();
+                return View("Index", listaDeiPost);
             }
 
         }
 
-        [HttpGet]
         public IActionResult Details(int id)
         {
-            bool FunzioneDiRicercaPostById(Pizza pizza)
-            {
-                return pizza.Id == id;
-            }
-
-
             using (PizzeriaContext db = new PizzeriaContext())
             {
                 // LINQ: syntax methos
-                Pizza pizzaTrovato = db.Pizze
-                    .Where(SingolaPizzaNelDb => SingolaPizzaNelDb.Id == id)
+                Pizza postTrovato = db.Pizze
+                    .Where(SingoloPostNelDb => SingoloPostNelDb.Id == id)
+                    .Include(pizza => pizza.Category)
                     .FirstOrDefault();
 
-                // LINQ: query syntax
-                Pizza pizzaTrovata =
-                    (from Pizza in db.Pizze
-                     where Pizza.Id == id
-                     select Pizza).FirstOrDefault<Pizza>();
-
-
-
-                if (pizzaTrovato != null)
+                if (postTrovato != null)
                 {
-                    return View(pizzaTrovato);
+                    return View(postTrovato);
                 }
 
-                return NotFound("la pizza con l'id cercato non esiste!");
+                return NotFound("Il post con l'id cercato non esiste!");
 
             }
 
@@ -60,64 +44,99 @@ namespace La_Mia_Pizzeria_1.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View("Create");
+            using (PizzeriaContext db = new PizzeriaContext())
+            {
+                List<Category> categoriesFromDb = db.Categories.ToList<Category>();
+
+                PostCategoriesView modelForView = new PostCategoriesView();
+                modelForView.Pizza = new Pizza();
+
+                modelForView.Categories = categoriesFromDb;
+
+                return View("Create", modelForView);
+            }
+
+
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Pizza formData)
+        public IActionResult Create(PostCategoriesView formData)
         {
             if (!ModelState.IsValid)
             {
+                using (PizzeriaContext db = new PizzeriaContext())
+                {
+                    List<Category> categories = db.Categories.ToList<Category>();
+
+                    formData.Categories = categories;
+                }
+
+
                 return View("Create", formData);
             }
 
             using (PizzeriaContext db = new PizzeriaContext())
             {
-                db.Pizze.Add(formData);
+                db.Pizze.Add(formData.Pizza);
                 db.SaveChanges();
             }
 
             return RedirectToAction("Index");
         }
 
+
         [HttpGet]
         public IActionResult Update(int id)
         {
             using (PizzeriaContext db = new PizzeriaContext())
             {
-                Pizza postToUpdate = db.Pizze.Where(pizza => pizza.Id == id).FirstOrDefault();
+                Pizza postToUpdate = db.Pizze.Where(articolo => articolo.Id == id).FirstOrDefault();
 
                 if (postToUpdate == null)
                 {
                     return NotFound("Il post non è stato trovato");
                 }
 
-                return View("Update", postToUpdate);
+                List<Category> categories = db.Categories.ToList<Category>();
+
+                PostCategoriesView modelForView = new PostCategoriesView();
+                modelForView.Pizza = postToUpdate;
+                modelForView.Categories = categories;
+
+                return View("Update", modelForView);
             }
 
         }
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Update(Pizza formData)
+        public IActionResult Update(int id, PostCategoriesView formData)
         {
             if (!ModelState.IsValid)
             {
+
+                using (PizzeriaContext db = new PizzeriaContext())
+                {
+                    List<Category> categories = db.Categories.ToList<Category>();
+
+                    formData.Categories = categories;
+                }
+
                 return View("Update", formData);
             }
 
             using (PizzeriaContext db = new PizzeriaContext())
             {
-                Pizza postToUpdate = db.Pizze.Where(articolo => articolo.Id == formData.Id).FirstOrDefault();
+                Pizze postToUpdate = db.Pizze.Where(articolo => articolo.Id == id).FirstOrDefault();
 
                 if (postToUpdate != null)
                 {
-                    postToUpdate.Title = formData.Title;
-                    postToUpdate.Description = formData.Description;
-                    postToUpdate.Image = formData.Image;
-                    postToUpdate.Prezzo = formData.Prezzo;
+
+                    postToUpdate.Title = formData.Pizza.Title;
+                    postToUpdate.Description = formData.Pizza.Description;
+                    postToUpdate.Image = formData.Pizza.Image;
+                    postToUpdate.CategoryId = formData.Pizza.CategoryId;
 
                     db.SaveChanges();
 
@@ -131,31 +150,35 @@ namespace La_Mia_Pizzeria_1.Controllers
 
         }
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
         {
             using (PizzeriaContext db = new PizzeriaContext())
             {
+                Pizza postToDelete = db.Pizze.Where(post => post.Id == id).FirstOrDefault();
 
-                Pizza pizzaToDelete = db.Pizze.Where(Pizza => Pizza.Id == id).FirstOrDefault();
-                if (pizzaToDelete != null)
+                if (postToDelete != null)
                 {
-                    db.Pizze.Remove(pizzaToDelete);
+                    db.Pizze.Remove(postToDelete);
                     db.SaveChanges();
+
+                    return RedirectToAction("Index");
                 }
-                return RedirectToAction("Index");
+                else
+                {
+                    return NotFound("Il post da eliminare non è stato trovato!");
+                }
             }
         }
 
-
-
-
-
-
-
-
+        [HttpDelete]
+        public IActionResult ProvaDelete()
+        {
+            return View("Create");
+        }
 
     }
+
 }
+

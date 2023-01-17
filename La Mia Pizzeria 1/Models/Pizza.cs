@@ -28,7 +28,7 @@ namespace La_Mia_Pizzeria_1.Models
         public double Prezzo { get; set; }
 
         public int CategoryId { get; set; }
-        public Category? Category { get; set; }
+        public Category Category { get; set; }
 
 
 
