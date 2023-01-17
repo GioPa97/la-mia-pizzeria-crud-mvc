@@ -102,7 +102,7 @@ namespace La_Mia_Pizzeria_1.Controllers
                 List<Category> categories = db.Categories.ToList<Category>();
 
                 PostCategoriesView modelForView = new PostCategoriesView();
-                modelForView.Pizza = postToUpdate;
+                modelForView.Pizze = postToUpdate;
                 modelForView.Categories = categories;
 
                 return View("Update", modelForView);
