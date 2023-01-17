@@ -1,0 +1,57 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    background-color: papayawhip;
+}
+
+.post-list-table td.title {
+    min-width: 200px;
+}
+
+.post-list-table td.image img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+.single-img {
+    width: 100px;
+    height: 100px;
+   
+}
+   
+
+.post-list-table td.items-buttons .buttons {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.items-buttons .buttons > * {
+    margin: 5px;
+}
+
+.pizza-single-image-container {
+    margin-bottom: 10px;
+    width: 100px;
+    height: 100px;
+}
+.img-detail {
+    width: 300px;
+    height: 300px;
+    display: flex;
+}
+
+

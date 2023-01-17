@@ -1,0 +1,29 @@
+﻿.footer-container {
+    color: white;
+    text-align: center;
+    padding: 5px;
+    margin: 0px;
+    width: 100%;
+    position: absolute;
+
+
+    object-fit: contain;
+    
+}
+
+.footer a {
+    color: white;
+}
+
+.hr {
+    border: 1px solid gold;
+}
+
+.img-h {
+    height: 200px;
+    width: 100%;
+    background-position:top;
+    background-size:cover;
+    object-fit:contain;
+    background-repeat:no-repeat;
+}
