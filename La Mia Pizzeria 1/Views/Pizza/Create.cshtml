@@ -1,35 +1,40 @@
 ﻿@model PostCategoriesView
 
 <div class="container">
-    <form asp-controller="Pizza" asp-action="Create" method="post">
+    <form asp-controller="Post" asp-action="Create" method="post">
         @Html.AntiForgeryToken()
         <div class="mb-3">
             <label>Titolo:</label>
-            <input asp-for="Title" type="text" class="form-control" />
-            <span asp-validation-for="Title" class="text-danger"></span>
+            <input asp-for="Pizze.Title" type="text" class="form-control" />
+            <span asp-validation-for="Pizze.Title" class="text-danger"></span>
         </div>
         <div class="mb-3">
             <label>Descrizione:</label>
-            <textarea asp-for="Description" rows="10" class="d-block w-100"></textarea>
-            <span asp-validation-for="Description" class="text-danger"></span>
-
+            <textarea asp-for="Pizze.Description" rows="10" class="d-block w-100"></textarea>
+            <span asp-validation-for="Pizze.Description" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label>Categoria:</label>
+            <select asp-for="Pizze.CategoryId" rows="10" class="d-block w-100">
+                <option value=""></option>
+                @foreach (Category category in Model.Categories)
+                {
+                    <option value="@category.Id">@category.Title</option>
+                }
+            </select>
+            <span asp-validation-for="Pizze.CategoryId" class="text-danger"></span>
         </div>
         <div class="mb-3 form-check">
             <label>Path Immagine:</label>
-            <input asp-for="Image" type="text" class="form-control" />
-            <span asp-validation-for="Image" class="text-danger"></span>
-
+            <input asp-for="Pizze.Image" type="text" class="form-control" />
+            <span asp-validation-for="Pizze.Image" class="text-danger"></span>
         </div>
-
-        <div class="mb-3">
-        <label>Prezzo:</label>
-        <input asp-for="Prezzo"  class="form-control" />
-        <span asp-validation-for="Prezzo" class="text-danger"></span>
-</div>
+        <div class="mb-3 form-check">
+            <label>Prezzo:</label>
+            <input asp-for="Pizze.Prezzo" type="text" class="form-control" />
+            <span asp-validation-for="Pizze.Prezzo" class="text-danger"></span>
+        </div>
 
         <button type="submit" class="btn btn-primary">Salva</button>
     </form>
 </div>
-<span>
-    <br>
-</span>

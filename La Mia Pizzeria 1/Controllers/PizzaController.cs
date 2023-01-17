@@ -1,6 +1,7 @@
 ﻿using La_Mia_Pizzeria_1.Database;
 using La_Mia_Pizzeria_1.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 
 
@@ -27,7 +28,7 @@ namespace La_Mia_Pizzeria_1.Controllers
                 // LINQ: syntax methos
                 Pizza postTrovato = db.Pizze
                     .Where(SingoloPostNelDb => SingoloPostNelDb.Id == id)
-                    .Include(pizza => pizza.Category)
+                    .Include(pizze => pizze.Category)
                     .FirstOrDefault();
 
                 if (postTrovato != null)
@@ -49,7 +50,7 @@ namespace La_Mia_Pizzeria_1.Controllers
                 List<Category> categoriesFromDb = db.Categories.ToList<Category>();
 
                 PostCategoriesView modelForView = new PostCategoriesView();
-                modelForView.Pizza = new Pizza();
+                modelForView.Pizze = new Pizza();
 
                 modelForView.Categories = categoriesFromDb;
 
@@ -78,7 +79,7 @@ namespace La_Mia_Pizzeria_1.Controllers
 
             using (PizzeriaContext db = new PizzeriaContext())
             {
-                db.Pizze.Add(formData.Pizza);
+                db.Pizze.Add(formData.Pizze);
                 db.SaveChanges();
             }
 
@@ -128,15 +129,15 @@ namespace La_Mia_Pizzeria_1.Controllers
 
             using (PizzeriaContext db = new PizzeriaContext())
             {
-                Pizze postToUpdate = db.Pizze.Where(articolo => articolo.Id == id).FirstOrDefault();
+                Pizza postToUpdate = db.Pizze.Where(articolo => articolo.Id == id).FirstOrDefault();
 
                 if (postToUpdate != null)
                 {
 
-                    postToUpdate.Title = formData.Pizza.Title;
-                    postToUpdate.Description = formData.Pizza.Description;
-                    postToUpdate.Image = formData.Pizza.Image;
-                    postToUpdate.CategoryId = formData.Pizza.CategoryId;
+                    postToUpdate.Title = formData.Pizze.Title;
+                    postToUpdate.Description = formData.Pizze.Description;
+                    postToUpdate.Image = formData.Pizze.Image;
+                    postToUpdate.CategoryId = formData.Pizze.CategoryId;
 
                     db.SaveChanges();
 

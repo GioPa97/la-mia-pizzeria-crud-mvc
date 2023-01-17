@@ -1,6 +1,6 @@
 ﻿using La_Mia_Pizzeria_1.Models;
 using Microsoft.EntityFrameworkCore;
-using NetCore_01.Models;
+
 
 namespace La_Mia_Pizzeria_1.Database
 {
