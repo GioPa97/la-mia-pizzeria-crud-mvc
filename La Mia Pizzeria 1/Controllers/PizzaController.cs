@@ -15,7 +15,7 @@ namespace La_Mia_Pizzeria_1.Controllers
         {
             using (PizzeriaContext db = new PizzeriaContext())
             {
-                List<Pizza> listaDellePizza = db.Pizzas.OrderBy(title => title.Title).ToList<Pizza>();
+                List<Pizza> listaDellePizza = db.Pizze.OrderBy(id => id.CategoryId).ToList<Pizza>();
 
                 ; return View("Index", listaDellePizza);
             }
@@ -34,13 +34,13 @@ namespace La_Mia_Pizzeria_1.Controllers
             using (PizzeriaContext db = new PizzeriaContext())
             {
                 // LINQ: syntax methos
-                Pizza pizzaTrovato = db.Pizzas
+                Pizza pizzaTrovato = db.Pizze
                     .Where(SingolaPizzaNelDb => SingolaPizzaNelDb.Id == id)
                     .FirstOrDefault();
 
                 // LINQ: query syntax
                 Pizza pizzaTrovata =
-                    (from Pizza in db.Pizzas
+                    (from Pizza in db.Pizze
                      where Pizza.Id == id
                      select Pizza).FirstOrDefault<Pizza>();
 
@@ -74,7 +74,7 @@ namespace La_Mia_Pizzeria_1.Controllers
 
             using (PizzeriaContext db = new PizzeriaContext())
             {
-                db.Pizzas.Add(formData);
+                db.Pizze.Add(formData);
                 db.SaveChanges();
             }
 
@@ -86,7 +86,7 @@ namespace La_Mia_Pizzeria_1.Controllers
         {
             using (PizzeriaContext db = new PizzeriaContext())
             {
-                Pizza postToUpdate = db.Pizzas.Where(pizza => pizza.Id == id).FirstOrDefault();
+                Pizza postToUpdate = db.Pizze.Where(pizza => pizza.Id == id).FirstOrDefault();
 
                 if (postToUpdate == null)
                 {
@@ -110,7 +110,7 @@ namespace La_Mia_Pizzeria_1.Controllers
 
             using (PizzeriaContext db = new PizzeriaContext())
             {
-                Pizza postToUpdate = db.Pizzas.Where(articolo => articolo.Id == formData.Id).FirstOrDefault();
+                Pizza postToUpdate = db.Pizze.Where(articolo => articolo.Id == formData.Id).FirstOrDefault();
 
                 if (postToUpdate != null)
                 {
@@ -139,10 +139,10 @@ namespace La_Mia_Pizzeria_1.Controllers
             using (PizzeriaContext db = new PizzeriaContext())
             {
 
-                Pizza pizzaToDelete = db.Pizzas.Where(Pizza => Pizza.Id == id).FirstOrDefault();
+                Pizza pizzaToDelete = db.Pizze.Where(Pizza => Pizza.Id == id).FirstOrDefault();
                 if (pizzaToDelete != null)
                 {
-                    db.Pizzas.Remove(pizzaToDelete);
+                    db.Pizze.Remove(pizzaToDelete);
                     db.SaveChanges();
                 }
                 return RedirectToAction("Index");

@@ -4,6 +4,7 @@ using La_Mia_Pizzeria_1.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LaMiaPizzeria1.Migrations
 {
     [DbContext(typeof(PizzeriaContext))]
-    partial class PizzeriaContextModelSnapshot : ModelSnapshot
+    [Migration("20230117144142_CreateInitial")]
+    partial class CreateInitial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -78,7 +81,7 @@ namespace LaMiaPizzeria1.Migrations
             modelBuilder.Entity("La_Mia_Pizzeria_1.Models.Pizza", b =>
                 {
                     b.HasOne("NetCore_01.Models.Category", "Category")
-                        .WithMany("Pizzas")
+                        .WithMany("Pizze")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -88,7 +91,7 @@ namespace LaMiaPizzeria1.Migrations
 
             modelBuilder.Entity("NetCore_01.Models.Category", b =>
                 {
-                    b.Navigation("Pizzas");
+                    b.Navigation("Pizze");
                 });
 #pragma warning restore 612, 618
         }

@@ -5,7 +5,7 @@
 namespace LaMiaPizzeria1.Migrations
 {
     /// <inheritdoc />
-    public partial class @new : Migration
+    public partial class CorrettaDic : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

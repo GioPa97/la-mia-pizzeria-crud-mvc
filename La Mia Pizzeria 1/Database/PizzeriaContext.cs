@@ -1,17 +1,19 @@
 ﻿using La_Mia_Pizzeria_1.Models;
 using Microsoft.EntityFrameworkCore;
+using NetCore_01.Models;
 
 namespace La_Mia_Pizzeria_1.Database
 {
     public class PizzeriaContext : DbContext
     {
-        public DbSet<Pizza> Pizzas { get; set; }
+        public DbSet<Pizza> Pizze { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
-       
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=localhost;Database=MiaPizzeria01;" +
+            optionsBuilder.UseSqlServer("Data Source=localhost;Database=MiaPizzeria02;" +
             "Integrated Security=True;TrustServerCertificate=True");
         }
     }

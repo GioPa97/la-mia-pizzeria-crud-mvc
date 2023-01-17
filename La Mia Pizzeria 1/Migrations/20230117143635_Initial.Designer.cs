@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LaMiaPizzeria1.Migrations
 {
     [DbContext(typeof(PizzeriaContext))]
-    [Migration("20230113085335_new")]
-    partial class @new
+    [Migration("20230117143635_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,6 +31,9 @@ namespace LaMiaPizzeria1.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -52,7 +55,42 @@ namespace LaMiaPizzeria1.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Pizzas");
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("Pizze");
+                });
+
+            modelBuilder.Entity("NetCore_01.Models.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("La_Mia_Pizzeria_1.Models.Pizza", b =>
+                {
+                    b.HasOne("NetCore_01.Models.Category", "Category")
+                        .WithMany("Pizze")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("NetCore_01.Models.Category", b =>
+                {
+                    b.Navigation("Pizze");
                 });
 #pragma warning restore 612, 618
         }

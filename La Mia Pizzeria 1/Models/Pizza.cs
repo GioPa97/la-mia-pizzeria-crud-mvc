@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using NetCore_01.Models;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -25,6 +26,9 @@ namespace La_Mia_Pizzeria_1.Models
         public string Image { get; set; }
 
         public double Prezzo { get; set; }
+
+        public int CategoryId { get; set; }
+        public Category? Category { get; set; }
 
 
 
