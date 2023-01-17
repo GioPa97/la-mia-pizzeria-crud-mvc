@@ -78,7 +78,7 @@ namespace LaMiaPizzeria1.Migrations
             modelBuilder.Entity("La_Mia_Pizzeria_1.Models.Pizza", b =>
                 {
                     b.HasOne("NetCore_01.Models.Category", "Category")
-                        .WithMany("Pizzas")
+                        .WithMany("Pizze")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -88,7 +88,7 @@ namespace LaMiaPizzeria1.Migrations
 
             modelBuilder.Entity("NetCore_01.Models.Category", b =>
                 {
-                    b.Navigation("Pizzas");
+                    b.Navigation("Pizze");
                 });
 #pragma warning restore 612, 618
         }

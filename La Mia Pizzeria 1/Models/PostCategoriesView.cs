@@ -4,7 +4,7 @@ namespace NetCore_01.Models
     public class PostCategoriesView
     {
         // Il post vuoto che il mio form dovrà compilare
-        public Pizza Pizzas { get; set; }
+        public Pizza Pizze { get; set; }
 
         // QUesta lista di categories servirà per la select nel from in modo che possa far visualizzare all'utente
         // tutte le categorie da cui poter selezionare un opzione per il Post

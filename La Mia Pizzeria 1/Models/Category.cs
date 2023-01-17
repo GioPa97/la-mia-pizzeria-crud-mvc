@@ -8,7 +8,7 @@ namespace NetCore_01.Models
 
         public string Title { get; set; }
 
-        public List<Pizza> Pizzas { get; set; }
+        public List<Pizza> Pizze { get; set; }
 
         public Category()
         {

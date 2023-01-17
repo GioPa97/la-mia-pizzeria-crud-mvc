@@ -5,7 +5,7 @@
 namespace LaMiaPizzeria1.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class Nuovo : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -37,9 +37,9 @@ namespace LaMiaPizzeria1.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Pizzas", x => x.Id);
+                    table.PrimaryKey("PK_Pizze", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Pizzas_Categories_CategoryId",
+                        name: "FK_Pizze_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "Id",
@@ -47,7 +47,7 @@ namespace LaMiaPizzeria1.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pizzas_CategoryId",
+                name: "IX_Pizze_CategoryId",
                 table: "Pizze",
                 column: "CategoryId");
         }
