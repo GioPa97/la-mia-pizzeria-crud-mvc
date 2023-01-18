@@ -26,10 +26,12 @@
                 <strong>Ingredienti:</strong>
                 @Model.Description
             </p>
+            @if (Model.Category is not null){
             <p>
                 <strong>Categoria:</strong>
                 @Model.Category.Title
             </p>
+            }
             <p>
                 <strong>Impasto e preparazione:</strong>
                 <br>

@@ -137,6 +137,7 @@ namespace La_Mia_Pizzeria_1.Controllers
                     postToUpdate.Title = formData.Pizze.Title;
                     postToUpdate.Description = formData.Pizze.Description;
                     postToUpdate.Image = formData.Pizze.Image;
+                    postToUpdate.Prezzo = formData.Pizze.Prezzo;
                     postToUpdate.CategoryId = formData.Pizze.CategoryId;
 
                     db.SaveChanges();
@@ -157,7 +158,7 @@ namespace La_Mia_Pizzeria_1.Controllers
         {
             using (PizzeriaContext db = new PizzeriaContext())
             {
-                Pizza postToDelete = db.Pizze.Where(post => post.Id == id).FirstOrDefault();
+                Pizza postToDelete = db.Pizze.Where(pizza => pizza.Id == id).FirstOrDefault();
 
                 if (postToDelete != null)
                 {

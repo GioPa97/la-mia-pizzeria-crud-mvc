@@ -1,7 +1,7 @@
 ﻿@model PostCategoriesView
 
 <div class="container">
-    <form asp-controller="Post" asp-action="Update" asp-route-id="@Model.Pizze.Id" method="post">
+    <form asp-controller="Pizza" asp-action="Update" asp-route-id="@Model.Pizze.Id" method="post">
         @Html.AntiForgeryToken()
         <div class="mb-3">
             <label>Id:</label>
@@ -27,6 +27,11 @@
                 }
             </select>
             <span asp-validation-for="Pizze.CategoryId" class="text-danger"></span>
+        </div>
+        <div class="mb-3 form-check">
+            <label>Prezzo</label>
+            <input asp-for="Pizze.Prezzo" type="text" class="form-control" />
+            <span asp-validation-for="Pizze.Prezzo" class="text-danger"></span>
         </div>
         <div class="mb-3 form-check">
             <label>Path Immagine:</label>
