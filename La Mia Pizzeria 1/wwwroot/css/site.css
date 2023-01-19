@@ -54,4 +54,15 @@ body {
     display: flex;
 }
 
+.img-view {
+    height: 600px;
+    width: 100%;
+ image-resolution:from-image;
+    background-size: cover;
+    object-fit: contain;
+    background-repeat: no-repeat;
+}
+
+
+
 

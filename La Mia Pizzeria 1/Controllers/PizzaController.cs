@@ -21,6 +21,16 @@ namespace La_Mia_Pizzeria_1.Controllers
 
         }
 
+        public IActionResult Prodotti()
+        {
+            using (PizzeriaContext db = new PizzeriaContext())
+            {
+                List<Pizza> listaDeiPost = db.Pizze.ToList<Pizza>();
+                return View("Prodotti", listaDeiPost);
+            }
+
+        }
+
         public IActionResult Details(int id)
         {
             using (PizzeriaContext db = new PizzeriaContext())

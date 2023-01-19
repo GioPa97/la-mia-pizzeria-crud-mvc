@@ -5,8 +5,7 @@
     margin: 0px;
     width: 100%;
     position: absolute;
-
-
+    image-resolution: from-image;
     object-fit: contain;
     
 }
@@ -20,10 +19,10 @@
 }
 
 .img-h {
-    height: 200px;
+    height: 350px;
     width: 100%;
-    background-position:top;
-    background-size:cover;
-    object-fit:contain;
-    background-repeat:no-repeat;
+    background-size: cover;
+    object-fit: contain;
+    background-repeat: no-repeat;
+    image-resolution: from-image;
 }
